@@ -1,11 +1,12 @@
 name: Generate Snake
 
+# Permissão para o robô escrever no repositório
+permissions: 
+  contents: write
+
 on:
-  # Executa automaticamente a cada 24 horas
   schedule:
     - cron: "0 0 * * *" 
-  
-  # Permite rodar manualmente na aba "Actions" para testar
   workflow_dispatch:
 
 jobs:
@@ -19,14 +20,12 @@ jobs:
       - name: Generate Snake
         uses: Platane/snk@v3
         with:
-          # Seu usuário do GitHub aqui
           github_user_name: ryhenriquee
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
       - name: Push to the output branch
-        # CORREÇÃO AQUI: O nome correto é ghaction-github-pages (sem o traço extra)
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
